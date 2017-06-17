@@ -227,7 +227,13 @@ int HttpUp::exec(ExecType type)
     curl_global_init(CURL_GLOBAL_ALL);
     curl = curl_easy_init();
 
+    struct curl_slist *headers=NULL;
+    headers = curl_slist_append(headers, "Cache-Control: no-cache, must-revalidate");
+    headers = curl_slist_append(headers, "Pragma: no-cache");
+
+
     char errorBuffer[CURL_ERROR_SIZE];
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, errorBuffer);
     curl_easy_setopt(curl, CURLOPT_FAILONERROR, 1);
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1);
