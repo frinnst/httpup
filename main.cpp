@@ -88,7 +88,7 @@ int main(int argc, char** argv)
         target = htap.otherArguments()[1];
     } else {
         char* pwd = new char[256];
-        if (getcwd(pwd, 265) == NULL) {
+        if (getcwd(pwd, 256) == NULL) {
             delete pwd;
             pwd = new char[1024];
             if (getcwd(pwd, 1024) == NULL) {
